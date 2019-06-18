@@ -1,0 +1,46 @@
+{
+  "name": "ci-cd-workshop-demo",
+  "version": "1.0.0",
+  "description": "Sample JS application to support the CI-CD workshop",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "browserify ./js/index.js -o dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mavericks-consulting/ci-cd-workshop-demo.git"
+  },
+  "keywords": [
+    "JS",
+    "HTML5",
+    "CSS",
+    "CI-CD",
+    "Agile",
+    "Workshop"
+  ],
+  "author": "Aashish Pundalik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mavericks-consulting/ci-cd-workshop-demo/issues"
+  },
+  "homepage": "https://github.com/mavericks-consulting/ci-cd-workshop-demo#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "@babel/preset-env"
+          ]
+        }
+      ]
+    ]
+  }
+}
