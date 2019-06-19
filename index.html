@@ -5,8 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ES6 - App</title>
     <script type="text/javascript" src="dist/bundle.js"></script>
+    <style type="text/css">
+        body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-container {
+            width: 350px;
+        }
+
+        #textInput {
+            width: 200px;
+            height: 30px;
+            margin-right: 20px;
+            padding: 5px;
+        }
+
+        #changeTextBtn {
+            width: 110px;
+            height: 30px;
+        }
+
+        #dynamicContent {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <section class="section"></section>
+    <div class="container">
+        <div class="content-container">
+                <section class = "input-container">
+                    <input id="textInput" placeholder="Enter text you want to display" />
+                    <button id="changeTextBtn">Change Text</button>
+                </section>
+                <h1 id="dynamicContent">CI/CD is awesome!</h1>
+        </div>
+    </div>
 </body>
 </html>
