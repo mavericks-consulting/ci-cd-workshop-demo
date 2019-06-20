@@ -1,6 +1,6 @@
 ---
 resources:
-  - name: codebase
+  - name: git
     type: git
     icon: github-circle
     source:
@@ -10,7 +10,7 @@ jobs:
   - name: test
     public: true
     plan:
-      - get: codebase
+      - get: git
         trigger: true
       - task: run-tests
         config:
@@ -19,7 +19,7 @@ jobs:
             type: registry-image
             source: { repository: node, tag: "8" }
           inputs:
-            - name: codebase
+            - name: git
           run:
             path: /bin/sh
             args:
@@ -27,6 +27,56 @@ jobs:
               - |
                 echo "Node Version: $(node --version)"
                 echo "NPM Version: $(npm --version)"
-                cd codebase
+                cd git
                 npm install
                 npm test
+  - name: e2e
+    public: true
+    plan:
+      - get: git
+        passed:
+          - test
+        trigger: true
+      - task: run-e2e-tests
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source: { repository: node, tag: "8" }
+          inputs:
+            - name: git
+          run:
+            path: /bin/sh
+            args:
+              - -c
+              - |
+                echo "Node Version: $(node --version)"
+                echo "NPM Version: $(npm --version)"
+                cd git
+                npm install
+                npm e2e
+  - name: deploy
+    public: true
+    plan:
+      - get: git
+        passed:
+          - e2e
+        trigger: true
+      - task: deploy
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source: { repository: node, tag: "8" }
+          inputs:
+            - name: git
+          run:
+            path: /bin/sh
+            args:
+              - -c
+              - |
+                echo "Node Version: $(node --version)"
+                echo "NPM Version: $(npm --version)"
+                cd git
+                npm install
+                npm xyz
