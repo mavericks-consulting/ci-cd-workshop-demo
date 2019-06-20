@@ -1,3 +1,3 @@
-test('test that build can break', () => {
-  expect(true).toBe(false);
+test('test run', () => {
+  expect(true).toBe(true);
 });
