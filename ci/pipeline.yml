@@ -5,7 +5,11 @@ resources:
     icon: github-circle
     source:
       uri: https://github.com/mavericks-consulting/ci-cd-workshop-demo.git
-
+  - name: every-30s
+    type: time
+    icon: clock-outline
+    source:
+      interval: 30s
 jobs:
   - name: test
     public: true
@@ -80,3 +84,18 @@ jobs:
                 cd git
                 npm install
                 npm xyz
+  - name: job
+    public: true
+    plan:
+      - get: every-30s
+        trigger: true
+      - task: simple-task
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source: { repository: busybox }
+          run:
+            path: echo
+            args: ["Hello, world!"]
+
